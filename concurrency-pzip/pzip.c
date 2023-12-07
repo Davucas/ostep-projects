@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/sysinfo.h>
+#include <time.h>
 
 #define MAX_SIZE_BUFFER 1000
 
@@ -106,7 +107,14 @@ void *compress(void *args){
 
 
 int main (int argc, char *argv[]) 
-{
+{   
+    clock_t start, end;
+    double cpu_time_used;
+    start = clock();
+
+
+
+
     if (argc < 2) {
         printf("pzip: file1 [file2 ...]\n");
         exit(1);
@@ -192,5 +200,13 @@ int main (int argc, char *argv[])
         }
     }
 
+
+
+
+
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("CPU time used: %f seconds\n", cpu_time_used);
+    
     return 0;
 }
